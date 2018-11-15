@@ -32,14 +32,24 @@ Vertex1 Vertex2 Edgeweight
 Example of a valid input file
 
 9
+
 A   B   1
+
 A   C   1
+
 A   D   2
+
 A   E   1
+
 A   F   4
+
 A   X   1
+
 A   H   1
+
 A   G   3
+
 A   Y   1
+
   
 
