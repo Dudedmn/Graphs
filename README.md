@@ -3,11 +3,11 @@ Directed Graph Structure
 
 Implements the following algorithms:
 
-**Breadth First Search**
+**Breadth First Search - Iterative**
 
-**Depth First Search**
+**Depth First Search - Recursive**
 
-**Dijkstra's Algorithm**
+**Dijkstra's Algorithm - Priority Queue**
 
 Uses the following STL containers for implementation:
 vector<Edge \*>
@@ -29,27 +29,4 @@ Vertex1 Vertex2 Edgeweight
 
 ... repeated
 
-Example of a valid input file
-
-9
-
-A   B   1
-
-A   C   1
-
-A   D   2
-
-A   E   1
-
-A   F   4
-
-A   X   1
-
-A   H   1
-
-A   G   3
-
-A   Y   1
-
-  
-
+Example of a valid input text files are provided
