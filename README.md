@@ -29,4 +29,4 @@ Vertex1 Vertex2 Edgeweight
 
 ... repeated
 
-Example of a valid input text files are provided
+Examples of a valid input text files are provided
