@@ -11,17 +11,26 @@ Implements the following algorithms:
 
 Uses the following STL containers for implementation:
 vector<Edge \*>
+
 map<string, string>
+
 map<string, int>
+
 map<string, Vertex*>
+
 priority_queue<priorityQueuePair, vector<priorityQueuePair>, greater<priorityQueuePair>>
+  
 
 Reads input files from a .txt file that contains the following format:
+
 Number of Edges
+
 Vertex1 Vertex2 Edgeweight
+
 ... repeated
 
 Example of a valid input file
+
 9
 A   B   1
 A   C   1
