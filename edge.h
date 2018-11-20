@@ -10,17 +10,6 @@ class Edge {
 friend class Vertex;
 friend class Graph;
 
-public:
-
-	//Unused Getters and Setters
-	/*
-	int getWeight() const;
-	Vertex* getVertexTo() const;
-	Vertex* getVertexFrom() const;
-	void setWeight(int w);
-	void setVertexFrom(Vertex * v);
-	void setVertexTo(Vertex * v);
-	*/
 private:
 	//Initialize an edge with 2 vertex pointers and a edge weight
 	Edge(Vertex* vertexFrom, Vertex* vertexTo, int edgeWeight);
