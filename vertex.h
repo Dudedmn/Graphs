@@ -14,19 +14,12 @@ public:
 	* @param string - outgoing string label for edge
 	* @return Edge* to the outgoing string label
 	*/
-	Edge* getOutgoingEdge(string l);
-	/*
-	//Unused Getters and setters
-	string getLabel() const;
-	vector<Edge *> getEdges() const;
-	void setVisited(bool state);
-	bool getVisited() const;
-	*/
+	Edge* getOutgoingEdge(const string &);
 private:
 	//private Constructor, as Graph is friend it's accesible
-	Vertex(string l);
+	Vertex(const string &);
 	//Stores all edges that are going out 
 	vector<Edge *> allOutgoingEdges;
-	bool visited = false;
-	string label = "";
+	bool visited;
+	string label;
 };
