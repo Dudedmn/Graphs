@@ -7,7 +7,6 @@
 #include <algorithm>
 #include <queue>
 #include <limits>
-using namespace std;
 
 Graph::Graph() {
 
@@ -15,15 +14,15 @@ Graph::Graph() {
 
 /** destructor, delete all vertices and edges */
 Graph::~Graph() {
-	//Iterate through all strings and vertices in a map
-	// then iterate through all edges in the vertices
+	//Iterate through all vertices and all edges in the vertices
 	for (auto const & sV : vertices) {
 		for (auto const & e : sV.second->allOutgoingEdges) {
 			delete e;
 		}
-		//Delete the vertex
+		//Delete the map vertex
 		delete sV.second;	
 	}
+	//Clear the map
 	vertices.clear();
 }
 
@@ -79,7 +78,6 @@ bool Graph::AddVertex(const std::string &label) {
 * */
 bool Graph::HasVertex(const std::string &label) const {
 	for (auto const & sV : vertices) {
-		//checking labels in map of vertices
 		if (sV.first == label || (sV.second)->label == label) {
 			return true;
 		}
@@ -112,7 +110,7 @@ void Graph::sortEdges(std::string &label) {
 * @return string representing edges and weights, "" if vertex not found
 * */
 std::string Graph::GetEdges(const std::string &label) const {
-	string edgeRead = "";
+	std::string edgeRead = "";
 	int edgeWeight = 0;
 	if (HasVertex(label)) {
 		sort(findVertex(label)->allOutgoingEdges.begin(), findVertex(label)->allOutgoingEdges.end(),
@@ -124,11 +122,11 @@ std::string Graph::GetEdges(const std::string &label) const {
 		for (auto e = findVertex(label)->allOutgoingEdges.begin(); e != findVertex(label)->allOutgoingEdges.end(); ++e) {
 			if (e == findVertex(label)->allOutgoingEdges.end() - 1) {
 				edgeWeight = (*e)->weight;
-				edgeRead += (*e)->vTo->label + "(" + to_string(edgeWeight) + ")";
+				edgeRead += (*e)->vTo->label + "(" + std::to_string(edgeWeight) + ")";
 			}
 			else {
 				edgeWeight = (*e)->weight;
-				edgeRead += (*e)->vTo->label + "(" + to_string(edgeWeight) + "),";
+				edgeRead += (*e)->vTo->label + "(" + std::to_string(edgeWeight) + "),";
 			}
 		}
 		return edgeRead;
@@ -218,8 +216,8 @@ bool Graph::Disconnect(const std::string &fromLabel, const std::string &toLabel)
 * */
 bool Graph::ReadFile(const std::string &filename) {
 	int edgeWeight;
-	string line, vertexFrom, vertexTo;
-	ifstream file(filename);
+	std::string line, vertexFrom, vertexTo;
+	std::ifstream file(filename);
 	if (file.is_open()) {
 		//First line is number of edges
 		//As we know the pre-format for the file where it's vertex 1, vertex 2, edge weight
@@ -229,12 +227,13 @@ bool Graph::ReadFile(const std::string &filename) {
 			//Connect adds the number of edges
 			Connect(vertexFrom, vertexTo, edgeWeight);
 		}
+	
 		file.close();
 		return true;
 	}
 	//Unable to open the file
 	else {
-		cout << "Unable to open file" << endl;
+		std::cout << "Unable to open file" << std::endl;
 		return false;
 	}
 
@@ -287,23 +286,23 @@ void Graph::Dijkstra(const std::string &startLabel,
 	//Maximum distance
 	int INF = std::numeric_limits<int>::max();
 	//Set source vertex weight to 0, this will be erased later
-	weights.insert(std::pair<string, int>(startLabel, 0));
+	weights.insert(std::pair<std::string, int>(startLabel, 0));
 
 	//Insert ONLY connected vertices into map, initialize weights to INF
 	for (const auto & e : findVertex(startLabel)->allOutgoingEdges) {
 		//Don't reinsert source vertex
 			weights.insert(std::pair<std::string, int>(e->vTo->label, INF));
 			//Assign all labels to itself first
-			previous.insert(std::pair<string, string>(e->vTo->label, e->vTo->label));
+			previous.insert(std::pair<std::string, std::string>(e->vTo->label, e->vTo->label));
 		}
 
 	//Distance of vertexes
-	using priorityQueuePair = pair<Vertex*, int> ;
+	using priorityQueuePair = std::pair<Vertex*, int> ;
 	//Sort priority quee based on least to greatest
-	priority_queue<priorityQueuePair, vector<priorityQueuePair>, greater<priorityQueuePair>> pq;
+	std::priority_queue<priorityQueuePair, std::vector<priorityQueuePair>, std::greater<priorityQueuePair>> pq;
 
 	//Push source node into priority queue
-	pq.push(make_pair(findVertex(startLabel) , 0));
+	pq.push(std::make_pair(findVertex(startLabel) , 0));
 
 	while (!pq.empty()) {
 		//Assigns current vertex from priority queue
@@ -314,7 +313,7 @@ void Graph::Dijkstra(const std::string &startLabel,
 			//Don't reinsert source vertex
 			weights.insert(std::pair<std::string, int>(e->vTo->label, INF));
 			//Assign all labels to itself first
-			previous.insert(std::pair<string, string>(e->vTo->label, e->vTo->label));
+			previous.insert(std::pair<std::string, std::string>(e->vTo->label, e->vTo->label));
 		}
 
 		//Remove vertex from queue
@@ -322,12 +321,12 @@ void Graph::Dijkstra(const std::string &startLabel,
 		//Iterate through all connected edges to the current vertex
 		for (const auto & e : currentV->allOutgoingEdges) {
 			//If current vertex + edge weight is less than weight of adjacent vertex
-	if ((weights.at(currentV->label) + e->weight) < weights.at(e->vTo->label)) {
+			if ((weights.at(currentV->label) + e->weight) < weights.at(e->vTo->label)) {
 
 				//Adjacent vertex weight is now current weight + edge weight
 				weights.at(e->vTo->label) = (weights.at(currentV->label) + e->weight);
 				//push weights into priority queue
-				pq.push(make_pair(e->vTo, weights.at(e->vTo->label)));
+				pq.push(std::make_pair(e->vTo, weights.at(e->vTo->label)));
 				//Add vertex to previous map
 				previous.at(e->vTo->label) = currentV->label;
 			}
@@ -343,8 +342,8 @@ void Graph::Dijkstra(const std::string &startLabel,
 
 /** mark all verticies as unvisited */
 void Graph::unvisitVertices() {
-	for (const auto & v : vertices) {
-		v.second->visited = false;
+	for (const auto & sV : vertices) {
+		sV.second->visited = false;
 	}
 }
 
@@ -369,7 +368,7 @@ void Graph::bfsHelper(Vertex *v, void visit(const std::string &)) {
 	//Sorts edges in alphabetical order
 	sortEdges(v->label);
 	//Create a new empty queue and enqueue v
-	queue<Vertex*> *qV = new queue<Vertex*>;
+	std::queue<Vertex*> *qV = new std::queue<Vertex*>;
 	qV->push(v);
 
 	//Visit the vertex
