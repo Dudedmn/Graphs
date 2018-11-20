@@ -2,7 +2,6 @@
 //@date 11/10/2018
 //Edge implementation class for edge.h
 #include "edge.h"
-using namespace std;
 
 //Constructor to initialize an edge
 Edge::Edge(Vertex* v1, Vertex* v2, int edgeWeight) 
