@@ -4,10 +4,10 @@
 #include "vertex.h"
 
 //One liner to initialize vertex with a label and visit state
-Vertex::Vertex(const string & sLabel) : label(sLabel), visited(false) {}
+Vertex::Vertex(const std::string & sLabel) : label(sLabel), visited(false) {}
 
 //Returns the outgoing edge based on the string
-Edge* Vertex::getOutgoingEdge(const string & sLabel) {
+Edge* Vertex::getOutgoingEdge(const std::string & sLabel) {
 	//Ranged based iterator to return an edge based on the string
 	for (const auto & e : allOutgoingEdges) {
 		if (e->vTo->label == sLabel) {
