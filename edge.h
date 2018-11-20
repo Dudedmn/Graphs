@@ -14,7 +14,7 @@ private:
 	//Initialize an edge with 2 vertex pointers and a edge weight
 	Edge(Vertex* vertexFrom, Vertex* vertexTo, int edgeWeight);
 	//Vertex pointers and edge weight
-	Vertex * vFrom = nullptr;
-	Vertex * vTo = nullptr;
-	int weight = 0;
+	Vertex * vFrom;
+	Vertex * vTo;
+	int weight;
 };
