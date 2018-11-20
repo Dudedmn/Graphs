@@ -15,16 +15,15 @@ Graph::Graph() {
 
 /** destructor, delete all vertices and edges */
 Graph::~Graph() {
-	//Iterate through all vertices and all edges in the vertices
-	for (auto const & v : vertices) {
-		for (auto const & e : v.second->allOutgoingEdges) {
-			//Delete the edge
+	//Iterate through all strings and vertices in a map
+	// then iterate through all edges in the vertices
+	for (auto const & sV : vertices) {
+		for (auto const & e : sV.second->allOutgoingEdges) {
 			delete e;
 		}
 		//Delete the vertex
-		delete v.second;	
+		delete sV.second;	
 	}
-	//Clear the map
 	vertices.clear();
 }
 
@@ -79,10 +78,9 @@ bool Graph::AddVertex(const std::string &label) {
 * @return true if vertex is in the graph, false if not
 * */
 bool Graph::HasVertex(const std::string &label) const {
-	for (auto const & v : vertices) {
-		//debug print
-			//	cout << v.first << " " << v.second << " label: " << label << endl;
-		if (v.first == label || (v.second)->label == label) {
+	for (auto const & sV : vertices) {
+		//checking labels in map of vertices
+		if (sV.first == label || (sV.second)->label == label) {
 			return true;
 		}
 	}
@@ -159,10 +157,10 @@ bool Graph::Connect(const std::string &fromLabel,
 		return false;
 	}
 	//If vertices don't exist, add them
-	if (HasVertex(fromLabel) == false) {
+	if (!HasVertex(fromLabel)) {
 		AddVertex(fromLabel);
 	}
-	if (HasVertex(toLabel) == false) {
+	if (!HasVertex(toLabel)) {
 		AddVertex(toLabel);
 	}
 	
@@ -230,12 +228,7 @@ bool Graph::ReadFile(const std::string &filename) {
 			file >> vertexFrom >> vertexTo >> edgeWeight;
 			//Connect adds the number of edges
 			Connect(vertexFrom, vertexTo, edgeWeight);
-		//Debug print
-		//cout << vertexFrom << " " << vertexTo << " " << edgeWeight << endl;
 		}
-		//Debug print
-		//cout << numberOfEdges << endl;
-
 		file.close();
 		return true;
 	}
@@ -322,8 +315,6 @@ void Graph::Dijkstra(const std::string &startLabel,
 			weights.insert(std::pair<std::string, int>(e->vTo->label, INF));
 			//Assign all labels to itself first
 			previous.insert(std::pair<string, string>(e->vTo->label, e->vTo->label));
-			//Debug weight prints
-			//cout << e->weight << " ";
 		}
 
 		//Remove vertex from queue
@@ -331,13 +322,7 @@ void Graph::Dijkstra(const std::string &startLabel,
 		//Iterate through all connected edges to the current vertex
 		for (const auto & e : currentV->allOutgoingEdges) {
 			//If current vertex + edge weight is less than weight of adjacent vertex
-
-			//Debug prints
-				//cout << "current vertex " << currentV->label << ": weight: " << weights.at(currentV->label) << endl;
-				//cout << "edge weight " << e->weight << endl;
-				//cout << "to vertex " << e->vTo->label << ": weight: " << weights.at(e->vTo->label) << endl;
-
-			if ((weights.at(currentV->label) + e->weight) < weights.at(e->vTo->label)) {
+	if ((weights.at(currentV->label) + e->weight) < weights.at(e->vTo->label)) {
 
 				//Adjacent vertex weight is now current weight + edge weight
 				weights.at(e->vTo->label) = (weights.at(currentV->label) + e->weight);
