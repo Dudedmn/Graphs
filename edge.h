@@ -1,9 +1,6 @@
 //@author Daniel Yan
 //@date 11/10/2018
 //Lightweight edge interface
-#include <string>
-using namespace std;
-
 class Vertex;
 
 class Edge {
