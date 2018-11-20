@@ -7,7 +7,7 @@
 Vertex::Vertex(const string & label) : label(l), visited(false) {}
 
 //Returns the outgoing edge based on the string
-Edge* Vertex::getOutgoingEdge(string l) {
+Edge* Vertex::getOutgoingEdge(const string & label) {
 	//Ranged based iterator to return an edge based on the string
 	for (const auto & e : allOutgoingEdges) {
 		if (e->vTo->label == l) {
