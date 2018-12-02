@@ -25,6 +25,7 @@ queue<Vertex*>
 
 ## File Input Format:
 
-Line 1: Number of Edges
-Repeated Lines: Vertex1 Vertex2 Edgeweight
-Examples of a valid input text files are provided
+Line 1: edgeNumber    
+Repeated Lines: vertex1 vertex2 edgeWeight  
+
+Examples of a valid input text files are provided in the repo
