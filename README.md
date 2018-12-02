@@ -1,7 +1,7 @@
 # Graphs
 Directed Graph Structure
 
-Implements the following algorithms:
+## Implements the following algorithms:
 
 **Breadth First Search - Iterative**
 
@@ -9,7 +9,7 @@ Implements the following algorithms:
 
 **Dijkstra's Algorithm - Priority Queue**
 
-Uses the following STL containers for implementation:
+## Uses the following STL containers for implementation:
 
 vector<Edge \*>
 
@@ -23,12 +23,8 @@ priority_queue<priorityQueuePair, vector<priorityQueuePair>, greater<priorityQue
  
 queue<Vertex*>
 
-Reads input files from a .txt file that contains the following format:
+## File Input Format:
 
-Number of Edges
-
-Vertex1 Vertex2 Edgeweight
-
-... repeated
-
+Line 1: Number of Edges
+Repeated Lines: Vertex1 Vertex2 Edgeweight
 Examples of a valid input text files are provided
