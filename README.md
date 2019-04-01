@@ -1,31 +1,36 @@
 # Graphs
-Directed Graph Structure
+Creates a uni-directional Graph structure from a valid file input, and performs BFS, DFS, and Dijkstra's Searching Algorithms on the created Graph.
 
 ## Implements the following algorithms:
 
-**Breadth First Search - Iterative**
++ *Breadth First Search - Iterative*
 
-**Depth First Search - Recursive**
++ *Depth First Search - Recursive*
 
-**Dijkstra's Algorithm - Priority Queue**
++ *Dijkstra's Algorithm - Priority Queue*
 
 ## Uses the following STL containers for implementation:
 
-vector<Edge \*>
++ *vector*
 
-map<string, string>
++ *map*
 
-map<string, int>
-
-map<string, Vertex*>
-
-priority_queue<priorityQueuePair, vector<priorityQueuePair>, greater<priorityQueuePair>>
++ *priority_queue*
  
-queue<Vertex*>
++ *queue*
 
 ## File Input Format:
-
-Line 1: edgeNumber    
-Repeated Lines: vertex1 vertex2 edgeWeight  
-
-Examples of a valid input text files are provided in the repo
+<pre>
+Line 1: Number_of_Edges
+Repeated Lines: Vertex_One Vertex_Two Edge_Weight  
+</pre>
+Example of a valid file input.
+<pre>
+6
+A  C  5
+A  D  7
+A  E  5
+D  E  1
+C  D  3
+B  D  4
+</pre>
